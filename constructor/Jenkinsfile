@@ -21,8 +21,8 @@ pipeline
 				script
 				{
 					powershell 'Invoke-Expression ${PWD}\\constructor\\constructbuilder.ps1'
-					powershell 'Write-Output `
-					"Hello world!"'
+					powershell '''Write-Output `
+					"Hello world!"'''
 				}
 			}
 		}
