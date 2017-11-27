@@ -20,7 +20,7 @@ pipeline
 
 				script
 				{
-					powershell '${PWD}\\constructor\\constructbuilder.ps1'
+					powershell '-executionpolicy bypass -File ${PWD}\\constructor\\constructbuilder.ps1'
 				}
 			}
 		}
