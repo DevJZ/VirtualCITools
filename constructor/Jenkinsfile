@@ -20,7 +20,7 @@ pipeline
 
 				script
 				{
-					powershell '${PWD}\\constructor\\constructbuilder.psl'
+					powershell '${PWD}\\constructor\\constructbuilder.ps1'
 				}
 			}
 		}
