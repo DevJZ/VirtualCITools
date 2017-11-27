@@ -15,14 +15,14 @@ pipeline
 			{
 				script
 				{
-					powershell 'if(( docker images -q ${env:IMAGE_NAME}) -eq $null ) { docker build -f ${PWD}\\constructor\\basicbuilder\\Dockerfile -t ${env:IMAGE_NAME} ${PWD}\\constructor\\basicbuilder; ${env:SAUCE_ACCESS_PSW} | docker login --username ${env:SAUCE_ACCESS_USR} --password-stdin; docker push ${env:IMAGE_NAME} } else {Write-Output "found ${env:IMAGE_NAME}"}'
+					powershell '''if(( docker images -q ${env:IMAGE_NAME}) -eq $null ) 
+								{ docker build -f ${PWD}\\constructor\\basicbuilder\\Dockerfile -t ${env:IMAGE_NAME} ${PWD}\\constructor\\basicbuilder; ${env:SAUCE_ACCESS_PSW} | docker login --username ${env:SAUCE_ACCESS_USR} --password-stdin; docker push ${env:IMAGE_NAME} } 
+								else {Write-Output "found ${env:IMAGE_NAME}"}'
 				}
 
 				script
 				{
 					powershell 'Invoke-Expression ${PWD}\\constructor\\constructbuilder.ps1'
-					powershell '''Write-Output `
-					"Hello world!"'''
 				}
 			}
 		}
