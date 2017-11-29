@@ -15,9 +15,9 @@ pipeline
 			{
 				script
 				{
-					
-					powershell '$githash=git -C ${PWD} log -1 --format="%h"'
-					powershell 'Write-Output "commit hash: $githash" '
+					def output = powershell(returnStdout: true, script: 'git -C ${PWD} log -1 --format="%h"')
+					powershell """ Write-Output $env:output """
+
 					powershell '''if(( docker images -q ${env:IMAGE_NAME}) -ne $null ) 
 							{$commithash=(git -C ${PWD} log -1 --format="%h"); 
 							($machinename="mynet4builder"+$commithash);
