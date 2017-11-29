@@ -18,7 +18,7 @@ pipeline
 					def output = powershell(returnStdout: true, script: 'git -C ${PWD} log -1 --format="%h"')
 					withEnv(['output = $output'])
 					{
-						powershell """ Write-Output "$envoutput" """
+						powershell """ Write-Output "$env:output" """
 					}
 					powershell '''if(( docker images -q ${env:IMAGE_NAME}) -ne $null ) 
 							{$commithash=(git -C ${PWD} log -1 --format="%h"); 
