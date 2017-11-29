@@ -27,7 +27,7 @@ pipeline
 					{
 						powershell """if(( docker images -q ${IMAGE_NAME}) -ne $null ) 
 								{$myhashcode=(git -C ${PWD} log -1 --format="%h"); 
-								($machinename="mynet4builder_$myhashcode");
+								($machinename="mynet4builder_${myhashcode}");
 								docker run --rm -d --name=${machinename} --env myusername=${USERNAME} --env mypassword=${PASSWORD} -t ${IMAGE_NAME};
 								docker exec ${machinename} cmd /k 'set'
 								docker stop ${machinename}} """
