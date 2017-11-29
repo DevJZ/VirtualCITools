@@ -19,7 +19,7 @@ pipeline
 					withEnv(['output=$output'])
 					{
 						echo "b:$output"
-						powershell  ' """ Write-Output "$env:output" """ '
+						powershell  """ Write-Output "$env:output" """
 					}
 					//def tt = 
 
