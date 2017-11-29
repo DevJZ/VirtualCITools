@@ -15,7 +15,7 @@ pipeline
 			{
 				script
 				{
-					def machinename = powershell(returnStdout: true, script: '"net4xbuilder+"_"(git symbolic-ref --short HEAD)+"_"+(git -C ${PWD} log -1 --format="%h")')
+					def machinename = powershell(returnStdout: true, script: '"net4xbuilder+"_"+(git symbolic-ref --short HEAD)+"_"+(git -C ${PWD} log -1 --format="%h")')
 
 					powershell """Write-Output ${commit_hash}"""
 					powershell """Write-Output ${IMAGE_NAME}"""
