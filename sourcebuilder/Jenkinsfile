@@ -15,7 +15,7 @@ pipeline
 			{
 				script
 				{
-					def machinename = powershell(returnStdout: true, script: 'git -C ${PWD} log -1 --format="%h" ')
+					def machinename = powershell(returnStdout: true, script: '$currentdir=pwd.path; git -C $currentdir log -1 --format="%h" ')
 
 					powershell """Write-Output ${machinename}"""
 					powershell """Write-Output ${IMAGE_NAME}"""
