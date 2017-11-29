@@ -19,7 +19,7 @@ pipeline
 					powershell """Write-Output ${commit_hash}"""
 					powershell """Write-Output ${IMAGE_NAME}"""
 					powershell """ PWD """
-					powershell """if( ( docker images -q ${IMAGE_NAME} ) -ne ${null} ) {Write-Output 'ab' } """
+					powershell """if( ( docker images -q ${IMAGE_NAME} ) -ne ${null} ) {Write-Output "abcde" } """
 					
 					// powershell """if(( docker images -q ${IMAGE_NAME} ) -ne $null ) 
 					// 		{($machinename="mynet4builder_${commit_hash}");
