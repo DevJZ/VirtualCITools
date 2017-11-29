@@ -19,7 +19,7 @@ pipeline
 					withEnv(['myoutput=$output'])
 					{
 						echo "b:$output"
-						powershell """Write-Output ${myoutput}"""
+						powershell """Write-Output ${output}"""
 					}
 					
 					powershell '''if(( docker images -q ${env:IMAGE_NAME}) -ne $null ) 
