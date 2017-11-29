@@ -16,7 +16,7 @@ pipeline
 				script
 				{
 					def output = powershell(returnStdout: true, script: 'git -C ${PWD} log -1 --format="%h"')
-					withEnv(['myoutput = $output'])
+					withEnv(['myoutput':'$output'])
 					{
 						echo "b : $myoutput"
 					}
