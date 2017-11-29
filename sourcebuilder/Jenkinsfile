@@ -16,7 +16,7 @@ pipeline
 			{
 				script
 				{
-					def output = powershell(returnStdout: true, script: '[Environment]::SetEnvironmentVariable(COMMITHASH, (git -C ${PWD} log -1 --format="%h"))')
+					def output = powershell(returnStdout: true, script: '$value=(git -C ${PWD} log -1 --format="%h"); [Environment]::SetEnvironmentVariable("COMMITHASH", "$value" )')
 					println(output)					
 					powershell 'Write-Output ${env:COMMITHASH}'
 					powershell '''if(( docker images -q ${env:IMAGE_NAME}) -ne $null ) 
