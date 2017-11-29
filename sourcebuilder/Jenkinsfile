@@ -25,7 +25,7 @@ pipeline
 					
 					powershell """if(( docker images -q ${IMAGE_NAME} ) -ne '' ) 
 							{docker run --rm -d --name=${machinename} --env myusername=${USERNAME} --env mypassword=${PASSWORD} -t ${IMAGE_NAME};
-							docker exec ${machinename} cmd /k 'set'
+							docker exec ${machinename} cmd /k 'set';
 							docker stop ${machinename}} """
 				}
 			}
