@@ -7,10 +7,8 @@ RUN SETX /M Path "%Path%;%NUGET441_BIN_PaTH%"
 
 FROM installednuget AS msbuild15
 ADD https://aka.ms/vs/15/release/vs_buildtools.exe C:\\msbuild15\\vs_buildtools.exe
-RUN C:\msbuild15\vs_buildtools.exe --add Microsoft.Component.MSBuild --add Microsoft.VisualStudio.Component.CoreBuildTools --add Microsoft.VisualStudio.Component.Roslyn.Compiler \
---add Microsoft.VisualStudio.Component.NuGet.BuildTools --add Microsoft.Net.Component.3.5.DeveloperTools --add Microsoft.Net.Component.4.TargetingPack --add Microsoft.Net.Component.4.5.TargetingPack \
---add Microsoft.Net.Component.4.5.1.TargetingPack --add Microsoft.Net.Component.4.5.2.TargetingPack --add Microsoft.Net.Component.4.6.TargetingPack --add Microsoft.Net.Component.4.6.1.TargetingPack \
---add Microsoft.Net.Component.4.6.2.TargetingPack --add Microsoft.Net.Component.4.7.TargetingPack --layout C:\msbuild15\ --lang en-US --passive --wait
+RUN C:\msbuild15\vs_buildtools.exe --add Microsoft.VisualStudio.Workload.MSBuildTools --add Microsoft.VisualStudio.Workload.NetCoreBuildTools --add Microsoft.VisualStudio.Workload.WebBuildTools \
+--includeRecommended --includeOptional --layout C:\msbuild15\ --lang en-US --passive --wait
 
 RUN powershell Import-PfxCertificate -FilePath C:\msbuild15\certificates\manifestCounterSignCertificates.p12 -CertStoreLocation Cert:\LocalMachine\Root
 RUN powershell Import-PfxCertificate -FilePath C:\msbuild15\certificates\manifestSignCertificates.p12 -CertStoreLocation Cert:\LocalMachine\Root
