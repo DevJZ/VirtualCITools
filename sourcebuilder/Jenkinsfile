@@ -16,12 +16,15 @@ pipeline
 				script
 				{
 					def output = powershell(returnStdout: true, script: 'git -C ${PWD} log -1 --format="%h"')
-
-					def tt = powershell returnStdout: true, script: """ Write-Output "$env:output" """
+					withEnv(['myoutput = $output'])
+					{
+						echo "b : $myoutput"
+					}
+					//def tt = powershell returnStdout: true, script: """ Write-Output "$env:output" """
 
 					powershell '''if(( docker images -q ${env:IMAGE_NAME}) -ne $null ) 
 							{$commithash=(git -C ${PWD} log -1 --format="%h"); 
-							($machinename="mynet4builder"+$commithash);
+							($machinename="mynet4builder_$commithash");
 							docker run --rm -d --name=$machinename --env myusername=$env:USERNAME --env mypassword=$env:PASSWORD -t ${env:IMAGE_NAME};
 							docker exec $machinename cmd /k 'set'
 							docker stop $machinename}'''
