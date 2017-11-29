@@ -17,7 +17,7 @@ pipeline
 				{
 					def commit_hash = powershell(returnStdout: true, script: 'git -C ${PWD} log -1 --format="%h"')
 					def branch_name = powershell(returnStdout: true, script: 'git branch')
-					def machinename = "'mynet4builder' + '_' + ${branch_name} + '_' + ${commit_hash}"
+					def machinename = "${branch_name} + '_' + ${commit_hash}"
 
 					powershell """Write-Output ${commit_hash}"""
 					powershell """Write-Output ${IMAGE_NAME}"""
