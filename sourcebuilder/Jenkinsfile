@@ -22,8 +22,8 @@ pipeline
 							{$commithash=(git -C ${PWD} log -1 --format="%h"); 
 							($machinename="mynet4builder"+$commithash);
 							docker run --rm -d --name=$machinename --env myusername=$env:USERNAME --env mypassword=$env:PASSWORD -t ${env:IMAGE_NAME};
-							docker exec $machinename cmd /k 'set';
-							docker stop $machinename}'''
+							docker exec $machinename cmd /k 'set'
+							}'''
 				}
 			}
 		}
