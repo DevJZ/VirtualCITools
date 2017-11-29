@@ -19,10 +19,9 @@ pipeline
 					withEnv(['output=$output'])
 					{
 						echo "b:$output"
-						powershell """${env:output}"""
+						
 					}
-					//def tt = 
-
+					powershell 'Write-Out ${env:output}'
 					powershell '''if(( docker images -q ${env:IMAGE_NAME}) -ne $null ) 
 							{$commithash=(git -C ${PWD} log -1 --format="%h"); 
 							($machinename="mynet4builder_$commithash");
