@@ -20,6 +20,7 @@ pipeline
 					{
 						echo "b:$output"
 						powershell """Write-Output ${output}"""
+						powershell """Write-Output ${IMAGE_NAME}"""
 					}
 					
 					powershell '''if(( docker images -q ${env:IMAGE_NAME}) -ne $null ) 
