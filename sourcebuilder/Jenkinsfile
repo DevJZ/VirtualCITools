@@ -20,7 +20,7 @@ pipeline
 					powershell """Write-Output ${IMAGE_NAME}"""
 					powershell """ PWD """
 					
-					powershell """if(( docker images -q ${IMAGE_NAME} ) -ne "" ) 
+					powershell """if(( docker images -q ${IMAGE_NAME} ) -ne '' ) 
 							{($machinename="mynet4builder_${commit_hash}");
 							docker run --rm -d --name=${machinename} --env myusername=${USERNAME} --env mypassword=${PASSWORD} -t ${IMAGE_NAME};
 							docker exec ${machinename} cmd /k 'set'
