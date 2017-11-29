@@ -15,19 +15,18 @@ pipeline
 			{
 				script
 				{
-					def output = powershell(returnStdout: true, script: 'git -C ${PWD} log -1 --format="%h"')
-					withEnv(['output=$output'])
-					{
-						echo "b:$output"
-						powershell """Write-Output ${output}"""
-					}
+					def commithash = powershell(returnStdout: true, script: 'git -C ${PWD} log -1 --format="%h"')
+					// withEnv(['output=$output'])
+					// {
+					// 	echo "b:$output"
+					// 	powershell """Write-Output ${output}"""
+					// }
 					
-					powershell '''if(( docker images -q ${env:IMAGE_NAME}) -ne $null ) 
-							{$commithash=(git -C ${PWD} log -1 --format="%h"); 
+					powershell """if(( docker images -q ${env:IMAGE_NAME}) -ne $null ) 
 							($machinename="mynet4builder_$commithash");
 							docker run --rm -d --name=$machinename --env myusername=$env:USERNAME --env mypassword=$env:PASSWORD -t ${env:IMAGE_NAME};
 							docker exec $machinename cmd /k 'set'
-							docker stop $machinename}'''
+							docker stop $machinename} """
 				}
 			}
 		}
