@@ -1,4 +1,4 @@
-ARG tagarg=3.5-windowsservercore-1709
+ARG tagarg=3.5-windowsservercore-1709 
 FROM microsoft/dotnet-framework:${tagarg} AS installednuget
 
 ADD https://dist.nuget.org/win-x86-commandline/v4.4.1/nuget.exe C:\\nuget\\v4.4.1\\nuget.exe
@@ -18,6 +18,14 @@ RUN powershell Import-PfxCertificate -FilePath C:\msbuild15\certificates\vs_inst
 
 RUN C:\msbuild15\vs_setup.exe --noweb --passive --norestart --wait 
 RUN powershell Remove-Item C:\msbuild15 -Recurse -Force
+
+ADD https://download.microsoft.com/download/5/D/F/5DF4B836-7DFD-4CCF-AC96-101E2A4C7421/dotnet-sdk-2.1.2-win-x64.exe C:\\dotnet-sdk-2.1.2-win-x64.exe
+RUN C:\dotnet-sdk-2.1.2-win-x64.exe /q /n & \
+    del C:\dotnet-sdk-2.1.2-win-x64.exe
+
+ADD https://download.microsoft.com/download/5/D/F/5DF4B836-7DFD-4CCF-AC96-101E2A4C7421/dotnet-sdk-2.1.2-win-x86.exe C:\\dotnet-sdk-2.1.2-win-x86.exe
+RUN C:\dotnet-sdk-2.1.2-win-x86.exe /q /n & \
+    del C:\dotnet-sdk-2.1.2-win-x86.exe
 
 RUN SETX /M BuildTools_COMMON7_Path "C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\Common7"
 RUN SETX /M BuildTools_TOOL_Path "C:\Program Files (x86)\Microsoft Visual Studio\2017\BuildTools\Common7\Tools"
