@@ -24,7 +24,3 @@ ADD https://download.microsoft.com/download/D/7/2/D725E47F-A4F1-4285-8935-A91AE2
 RUN C:\dotnet-sdk-2.0.3-win-x64.exe /q /n & \
     del C:\dotnet-sdk-2.0.3-win-x64.exe
 
-ADD ./msbuild15.4.8.50001_netcoresdk.zip C:\\msbuild.zip
-RUN powershell Expand-Archive -Path C:\msbuild.zip -DestinationPath C:\msbuild
-RUN powershell Remove-Item C:\msbuild.zip
-RUN C:\msbuild\vs_setup.exe --noweb --passive --norestart --wait
